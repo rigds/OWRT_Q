@@ -104,7 +104,7 @@ jobs:
           
           # 2. 进入目录并切换到你选定的这个 ID
           cd ./wrt/
-          git checkout 11ca5f39574ca2e49b22afcff50c39ffdc9752a0 || { echo "❌ 错误：ID 不在该仓库中！"; exit 1; }
+          git checkout d37760ef8e221bbceefb897852f47915f77b3631 || { echo "❌ 错误：ID 不在该仓库中！"; exit 1; }
 
           # 3. 记录哈希值（原脚本自带逻辑）
           echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
