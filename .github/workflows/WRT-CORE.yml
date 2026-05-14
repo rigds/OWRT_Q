@@ -98,9 +98,16 @@ jobs:
 
       - name: Clone Code
         run: |
-          git clone --depth=1 --single-branch --branch $WRT_BRANCH $WRT_REPO ./wrt/
+          # 1. 清理并克隆源码仓库
+          rm -rf ./wrt/
+          git clone $WRT_REPO ./wrt/
+          
+          # 2. 进入目录并切换到你选定的这个 ID
+          cd ./wrt/
+          git checkout 11ca5f39574ca2e49b22afcff50c39ffdc9752a0 || { echo "❌ 错误：ID 不在该仓库中！"; exit 1; }
 
-          cd ./wrt/ && echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
+          # 3. 记录哈希值（原脚本自带逻辑）
+          echo "WRT_HASH=$(git log -1 --pretty=format:'%h')" >> $GITHUB_ENV
 
           # GitHub Action 移除国内下载源
           PROJECT_MIRRORS_FILE="./scripts/projectsmirrors.json"
